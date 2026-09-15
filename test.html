@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <h1>Forms Test</h1>
+        <h2>Send to Google</h2>
+        <p>
+            <form action="https://www.google.com/search">
+            <input type="text" name="q">
+            <button type="submit">Search in Google</button>
+            </form>
+        </p>
+        <h2>Testing Radio Buttons</h2>
+        <p>
+            <form>
+                <label>Test radio 1:<input type="radio" name="radio" id="radio1" value="radio1"></label>
+                <label>Test radio 2:<input type="radio" name="radio" id="radio2" value="radio2"></label>
+                <label>Test radio 3:<input type="radio" name="radio" id="radio3" value="radio3"></label>
+                <button type="submit">Test</button>
+            </form>
+        </p>
+        <h2>Testing List</h2>
+        <p>
+            <form>
+                <label for="select">Select your test</label>
+                <select id="select" name="select_test">
+                    <option value="unselected" selected>Select your option</option>
+                    <option value="test">test</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                    <option value="test4">test4</option>
+                    <option value="test5">test5</option>
+                    <option value="test6">test6</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </p>
+        <h2>Testing Ranges</h2>
+        <p>
+            <form>
+                <label for="range">Select your test</label>
+                <input type="range" min="-100" max="100" id="range" name="range" value="100" step="10">
+                <button type="submit">Submit</button>
+            </form>
+        </p>
+        <h2>Textare test</h2>
+        <p>
+            <form>
+                <label for="textarea">Select your test</label>
+                <textarea id="textarea" name="textarea" rows="10" cols="40">Testing for text in textarea</textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </p>
+        <h2>Textare test</h2>
+        <p>
+            <form>
+                <label for="val1">Your name:</label>
+                <input type="text" id="val1" name="val1" required placeholder="Name">
+                <label for="val2">Your surname:</label>
+                <input type="text" id="val2" name="val2" required placeholder="Surname" minlength="3">
+                <button type="submit">Submit</button>
+            </form>
+        </p>
+    </body>
+</html>
