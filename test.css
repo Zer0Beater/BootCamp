@@ -1,20 +1,22 @@
 h1 {
     color: red;
     text-align: center;
-    text-decoration: overline;
 
 }
-.Inputs .Name {
-    background-color: indianred;
+.Inputs input[type=text] {
+    background-color: rgb(229, 171, 171);
     border: solid 3px;
     border-color: blue; 
     text-align: center;
 }
-.Inputs .Pass {
+.Inputs input[type=password] {
     background-color: indianred ;
     border: solid 3px;
     border-color: black; 
     text-align: center;
+}
+.Inputs .radios{
+    color: blue;
 }
 .h1Class {
     display: flex;
@@ -22,10 +24,9 @@ h1 {
     justify-content: space-between;
     gap: 20px;
 }
-.h1Class h1 {
+h1 {
     margin: 0;
     text-align: center;
-    text-decoration: underline;
 }
 .MainText h2, h3 {
     text-align: center;
@@ -37,8 +38,14 @@ h1 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.ipsum {
+.ipsum a{
     color: red;
+    text-decoration: none;
+}
+
+.ipsum a:hover {
+    color: purple;
+    text-decoration: underline;
 }
 
 .SubmitLogin {
@@ -54,4 +61,12 @@ Footer {
     text-align: center;
     background-color: #f1f1f1;
     padding: 10px;
+}
+
+button[type=submit]:hover {
+    color: red;
+}
+
+button[type=submit]:active {
+    background-color: purple;
 }
