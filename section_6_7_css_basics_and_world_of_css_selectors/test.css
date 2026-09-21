@@ -1,0 +1,72 @@
+h1 {
+    color: red;
+    text-align: center;
+
+}
+.Inputs input[type=text] {
+    background-color: rgb(229, 171, 171);
+    border: solid 3px;
+    border-color: blue; 
+    text-align: center;
+}
+.Inputs input[type=password] {
+    background-color: indianred ;
+    border: solid 3px;
+    border-color: black; 
+    text-align: center;
+}
+.Inputs .radios{
+    color: blue;
+}
+.h1Class {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+h1 {
+    margin: 0;
+    text-align: center;
+}
+.MainText h2, h3 {
+    text-align: center;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+}
+.MainText {
+    word-spacing: 5%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.ipsum a{
+    color: red;
+    text-decoration: none;
+}
+
+.ipsum a:hover {
+    color: purple;
+    text-decoration: underline;
+}
+
+.SubmitLogin {
+    text-decoration: underline;
+    resize: both 10px;
+}
+
+Footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+button[type=submit]:hover {
+    color: red;
+}
+
+button[type=submit]:active {
+    background-color: purple;
+}
