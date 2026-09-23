@@ -1,0 +1,31 @@
+div {
+    width: 300px;
+    height: 300px;
+    background-color: brown;
+}
+
+.FirstDiv {
+    background-color: aqua;
+    border: 2px black solid;
+}
+
+.SecondDiv {
+    background-color: blue;
+    border-width: 3px;
+    border-style: dotted;
+    border-color: red;
+}
+
+.ThirdDiv {
+    background-color: blueviolet;
+    border: 4px cyan dashed;
+    border-radius: 5%;
+}
+
+.FourthDiv  {
+    background-color: crimson;
+    border: 5px yellow groove;
+    border-bottom: 4px yellowgreen groove;
+    border-left: teal groove;
+    border-radius: 3%;
+}
