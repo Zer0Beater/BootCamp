@@ -1,11 +1,14 @@
+html {
+    background-color: darkslateblue;
+}
+
 div {
     width: 300px;
     height: 300px;
-    background-color: brown;
 }
 
 .FirstDiv {
-    background-color: aqua;
+    background-color: antiquewhite;
     border: 2px black solid;
 }
 
@@ -20,6 +23,8 @@ div {
     background-color: blueviolet;
     border: 4px cyan dashed;
     border-radius: 5%;
+    padding: 10px 15px;
+    
 }
 
 .FourthDiv  {
@@ -28,4 +33,5 @@ div {
     border-bottom: 4px yellowgreen groove;
     border-left: teal groove;
     border-radius: 3%;
+    margin: 10px;
 }
