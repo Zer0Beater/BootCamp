@@ -1,0 +1,95 @@
+html {
+    background-color: darkslateblue;
+}
+
+div {
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+}
+
+.Transformers div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border: 1px black solid;
+    margin: 20px;
+}
+
+.FirstDiv {
+    background-color: antiquewhite;
+    border: 2px black solid;
+    position: absolute;
+    top: 500px;
+    left: 500px;
+    transition: 1s;
+}
+
+.FirstDiv:hover {
+    border-radius: 30%;
+    border-color: blue;
+    background-color: red;
+
+}
+
+.SecondDiv {
+    background-color: blue;
+    border-width: 3px;
+    border-style: dotted;
+    border-color: red;
+}
+
+.ThirdDiv {
+    background-color: blueviolet;
+    border: 4px cyan dashed;
+    border-radius: 5%;
+    padding: 10px 15px;
+    position: relative;
+    top: 100px;
+}
+
+.FourthDiv  {
+    background-color: crimson;
+    border: 5px yellow groove;
+    border-bottom: 4px yellowgreen groove;
+    border-left: teal groove;
+    border-radius: 3%;
+    margin: 10px;
+}
+
+.FifthDiv  {
+    background-color: crimson;
+    border: black solid 10px;
+    position: relative;
+    top: 500px;
+    transition: top 5s ease-in-out
+}
+
+.FifthDiv:hover {
+    top: 0px;
+}
+
+.Transformers div:nth-of-type(1) {
+    transform: skew(30deg);
+}
+
+.Transformers div:nth-of-type(2) {
+    transform: translate(100px);
+}
+
+.Transformers div:nth-of-type(3) {
+    transform: scale(2);
+}
+
+.Transformers div:nth-of-type(4) {
+    transform: rotate3d(1, 2, 3, 10deg);
+}
+
+.Transformers div:nth-of-type(5) {
+    transform: rotate(1turn);
+    transition: transform 2s ease-out;
+}
+
+.Transformers div:nth-of-type(5):hover {
+    transform: rotate(0turn)
+}
