@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 40px 16px;
+      background: radial-gradient(circle at top, #2b2f3a, #111318);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    /* ===== Info panel (code) ===== */
+    .info {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1e1f26;
+      border: 1px solid #343744;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .info__bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #272935;
+      border-bottom: 1px solid #343744;
+    }
+
+    .info__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .info__dot:nth-child(1) { background: #ff5f57; }
+    .info__dot:nth-child(2) { background: #febc2e; }
+    .info__dot:nth-child(3) { background: #28c840; }
+
+    .info__title {
+      margin-left: 8px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #8b8fa3;
+    }
+
+    .info pre {
+      margin: 0;
+      padding: 18px 20px;
+      overflow-x: auto;
+    }
+
+    .info code {
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #6a9955;
+      white-space: pre;
+    }
+
+    /* ===== Card frame ===== */
+    .card {
+      width: 300px;
+      height: 420px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #1a1a1a;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    /* ===== Selected state ===== */
+    .card.selected {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow:
+        0 0 0 3px #ffd76a,
+        0 0 25px 6px rgba(255, 200, 80, 0.55),
+        0 18px 40px rgba(0, 0, 0, 0.7);
+      animation: selected-glow 1.8s ease-in-out infinite;
+    }
+
+    @keyframes selected-glow {
+      0%, 100% {
+        box-shadow:
+          0 0 0 3px #ffd76a,
+          0 0 20px 4px rgba(255, 200, 80, 0.45),
+          0 18px 40px rgba(0, 0, 0, 0.7);
+      }
+      50% {
+        box-shadow:
+          0 0 0 3px #ffe9a8,
+          0 0 34px 10px rgba(255, 200, 80, 0.75),
+          0 18px 40px rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    .card__inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--card-bg);
+    }
+
+    /* ===== Header: name + cost ===== */
+    .card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      border: 2px solid var(--card-border);
+      border-radius: 8px;
+      background: var(--card-plate);
+    }
+
+    .card__name {
+      font-size: 17px;
+      font-weight: bold;
+      color: #1b1b1b;
+    }
+
+    .card__cost {
+      display: flex;
+      gap: 4px;
+    }
+
+    .mana {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color: #1b1b1b;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .mana--neutral { background: #cfc8c0; }
+    .mana--fire    { background: #f08a5d; }
+    .mana--water   { background: #6ab7e6; }
+
+    /* ===== Art ===== */
+    .card__art {
+      height: 190px;
+      border: 2px solid var(--card-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .card__art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ===== Type line ===== */
+    .card__type {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 10px;
+      border: 2px solid var(--card-border);
+      border-radius: 8px;
+      background: var(--card-plate);
+      font-size: 14px;
+      font-weight: bold;
+      color: #1b1b1b;
+    }
+
+    .card__rarity {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffe58a, #c08a1e);
+      border: 1px solid #5a3d00;
+    }
+
+    /* ===== Text box ===== */
+    .card__text {
+      flex: 1;
+      padding: 8px 10px;
+      border: 2px solid var(--card-border);
+      border-radius: 4px;
+      background: #f3ead8;
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.4;
+      color: #3a3226;
+    }
+
+    /* ===== Footer: stats ===== */
+    .card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card__set {
+      font-size: 10px;
+      font-family: Arial, sans-serif;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .card__stats {
+      padding: 3px 12px;
+      border: 2px solid var(--card-border);
+      border-radius: 8px;
+      background: var(--card-plate);
+      font-size: 18px;
+      font-weight: bold;
+      color: #1b1b1b;
+    }
+
+    /* ===== Color themes ===== */
+    .card--fire {
+      --card-bg: linear-gradient(160deg, #b8452a, #6e1f12);
+      --card-plate: linear-gradient(90deg, #f6d7b8, #e9b98f);
+      --card-border: #4a1a0c;
+    }
+
+    .card--water {
+      --card-bg: linear-gradient(160deg, #2c6fa8, #123a5e);
+      --card-plate: linear-gradient(90deg, #d4e9f7, #a9cfea);
+      --card-border: #0c2a44;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cards">
+
+  <!-- Card 1 -->
+  <div class="card card--fire">
+    <div class="card__inner">
+      <div class="card__header">
+        <h2 class="card__name">Ember Warden</h2>
+        <div class="card__cost">
+          <span class="mana mana--neutral">3</span>
+          <span class="mana mana--fire">🔥</span>
+          <span class="mana mana--fire">🔥</span>
+        </div>
+      </div>
+
+      <div class="card__art">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfwLl9fSb-gOiF0urbPrRuU7m5HFa6vHJTBptsVJ4_xw&s=10" alt="Ember Warden">
+      </div>
+
+      <div class="card__type">
+        <span>Elemental Guardian</span>
+        <span class="card__rarity"></span>
+      </div>
+
+      <div class="card__text">
+        “Where the Warden walks, the ashes remember the forest they once were.”
+      </div>
+
+      <div class="card__footer">
+        <span class="card__set">ASH • 042/120</span>
+        <span class="card__stats">5 / 4</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card card--water">
+    <div class="card__inner">
+      <div class="card__header">
+        <h2 class="card__name">Tidecaller Nymph</h2>
+        <div class="card__cost">
+          <span class="mana mana--neutral">1</span>
+          <span class="mana mana--water">💧</span>
+        </div>
+      </div>
+
+      <div class="card__art">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9J-5SlnI4dsoMV4M82VDqg5XD2l7UCDJmG-XFANpQ4A&s=10" alt="Tidecaller Nymph">
+      </div>
+
+      <div class="card__type">
+        <span>Merfolk Mystic</span>
+        <span class="card__rarity"></span>
+      </div>
+
+      <div class="card__text">
+        “She hums, and the sea leans closer to listen.”
+      </div>
+
+      <div class="card__footer">
+        <span class="card__set">TDE • 017/120</span>
+        <span class="card__stats">2 / 3</span>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Info panel -->
+  <div class="info">
+    <div class="info__bar">
+      <span class="info__dot"></span>
+      <span class="info__dot"></span>
+      <span class="info__dot"></span>
+      <span class="info__title">creature.js</span>
+    </div>
+    <pre><code id="creature-info">// select creature to show more info</code></pre>
+  </div>
+
+  <script>
+    // write your code here
+    const cardFire = document.querySelector('.card--fire');
+    const cardWater = document.querySelector('.card--water');
+    const outputInfo = document.querySelector('#creature-info')
+    let selected = 0;
+    cardFire.onclick = function () {
+      if (selected == 1) {
+        swapSelected(cardWater, cardFire)
+        outputCardInfo(cardFire)
+      } else {
+        cardFire.classList.add('selected');
+        outputCardInfo(cardFire)
+        selected = 1
+      }
+    }
+    cardWater.onclick = function () {
+      if (selected == 1) {
+        swapSelected(cardFire, cardWater)
+        outputCardInfo(cardWater)
+      } else {
+        cardWater.classList.add('selected');
+        outputCardInfo(cardWater)
+        selected = 1
+      }
+    }
+    function swapSelected (before, after) {
+      before.classList.remove('selected')
+      after.classList.add('selected')
+    }
+    function outputCardInfo (card) {
+      let name = card.querySelector('.card__name').innerText
+      let type = card.querySelector('.card__type').innerText
+      let lore = card.querySelector('.card__text').innerText.replace(/["“”]/g, "'")
+      let stats = card.querySelector('.card__stats').innerText.replace(' / ', ',')
+      let setHalved = card.querySelector('.card__set').innerText.split(' • ')
+      let cardCost = card.querySelector('.card__cost')
+      let manaCost = [];
+      for (let element of cardCost.querySelectorAll('.mana')) {
+        manaCost.push(element.innerText);
+      }
+      outputInfo.innerText = 
+      'name: ' + "'" + name + "'," +
+      '\ncost: ' + '"' + manaCost.join('') + '",' +
+      '\ntype: ' + "'" + type + "'," + 
+      '\nloreText: ' + lore + "," +
+      '\nstats: ' + '[' + stats + ']' + "," + 
+      '\nreleaseCode: ' + "'" + setHalved[0] + "'," +
+      '\nid: ' + "'" + setHalved[1] + "'"
+    }
+  </script>
+</body>
+</html>
